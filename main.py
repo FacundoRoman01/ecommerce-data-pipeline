@@ -10,7 +10,7 @@ from transformar_clientes import transformar_clientes
 from transformar_carritos import transformar_carritos
 
 from cargar_a_sqlite import cargar_datos_a_sqlite
-from consultar_datos import generar_consultas_y_reportes
+from consultar_datos import generar_reporte_multitaba
 
 def ejecutar_pipeline_completo():
     inicio_total = time.time()
@@ -40,7 +40,7 @@ def ejecutar_pipeline_completo():
 
         # FASE 4: REPORTES Y CONSULTAS ANALÍTICAS
         print("📊 [FASE 4/4] Generando reportes de negocio y consultas SQL...")
-        generar_consultas_y_reportes()
+        generar_reporte_multitaba()
         print("✅ Reportes generados con éxito.\n")
 
         tiempo_total = time.time() - inicio_total
