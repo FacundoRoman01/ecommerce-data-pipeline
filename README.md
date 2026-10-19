@@ -14,25 +14,25 @@ Load (Carga): Creación e inserción de los datos limpios en una base de datos r
 Reporting (Generación de Reportes): Ejecución de consultas analíticas SQL avanzadas para exportar un libro de Excel corporativo multipestaña (.xlsx).
 
 
-📂 Estructura del Repositorio
+## 📂 Estructura del proyecto
+
+```text
 analisis-datos-etl/
-│
 ├── data/
 │   ├── raw/                  # Datos crudos extraídos de la API (JSON)
 │   ├── processed/            # Datos limpios y estructurados (CSV)
 │   └── reports/              # Reporte ejecutivo final (Excel multipestaña)
-│
 ├── .gitignore                # Archivos excluidos del control de versiones
 ├── cargar_a_sqlite.py        # Script de carga al Data Warehouse
-├── consultar_datos.py        # Motor de consultas SQL y exportación a Excel
-├── ecommerce.db              # Base de datos SQLite (generada por el pipeline)
+├── consultar_datos.py        # Consultas SQL y exportación a Excel
 ├── extraer_api.py            # Extracción de productos
 ├── extraer_carritos.py       # Extracción de carritos y transacciones
-├── extraer_datos_clientes.py # Extracción de datos demográficos de usuarios
+├── extraer_datos_clientes.py # Extracción de datos de clientes
 ├── main.py                   # Script orquestador principal del ETL
 ├── transformar_carritos.py   # Limpieza y normalización de carritos
 ├── transformar_clientes.py   # Limpieza y normalización de clientes
 └── transformar_productos.py  # Limpieza y normalización de productos
+```
 
 
 
