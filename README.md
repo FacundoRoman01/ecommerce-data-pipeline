@@ -2,26 +2,16 @@
 
 Proyecto integral de ingeniería de datos y análisis (ETL - Extract, Transform, Load) desarrollado en Python. Este sistema automatiza la extracción de datos de comercio electrónico desde APIs públicas, los limpia y normaliza mediante modelado relacional utilizando Pandas, los almacena en un Data Warehouse local con SQLite y genera un reporte ejecutivo multipestaña en Excel listo para su visualización interactiva en Looker Studio.
 
-🏗️ Arquitectura y Flujo del Pipeline
+🏗️ Arquitectura del Pipeline ETL
+El proyecto cuenta con un script orquestador (main.py) que automatiza la ejecución de todo el flujo de punta a punta:
 
-El proyecto implementa una arquitectura modular de software, garantizando una separación clara de responsabilidades entre las capas de extracción, transformación, almacenamiento y generación de reportes.
+Extraction (Extracción): Conexión a endpoints externos para consumir datos crudos (raw) de productos, usuarios y carritos/transacciones, guardándolos en formato JSON.
 
-[ API DummyJSON ] 
-       │
-       ▼ (Extracción)
-[ data/raw/ (*.json) ]
-       │
-       ▼ (Transformación con Pandas)
-[ data/processed/ (*.csv) ]
-       │
-       ▼ (Carga / Load)
-[ Data Warehouse SQLite (ecommerce.db) ]
-       │
-       ▼ (Consultas SQL Analíticas y Exportación Multipestaña)
-[ Reporte Ejecutivo (reporte_ejecutivo_ecommerce.xlsx) ]
-       │
-       ▼
-[ Dashboard Interactivo en Looker Studio ]
+Transformation (Transformación): Limpieza de nulos, estandarización de tipos de datos, creación de campos calculados (como el precio con descuento) y estructuración de tablas relacionales.
+
+Load (Carga): Creación e inserción de los datos limpios en una base de datos relacional local (ecommerce.db).
+
+Reporting (Generación de Reportes): Ejecución de consultas analíticas SQL avanzadas para exportar un libro de Excel corporativo multipestaña (.xlsx).
 
 
 📂 Estructura del Proyecto
@@ -29,23 +19,21 @@ El proyecto implementa una arquitectura modular de software, garantizando una se
 analisis-datos-etl/
 │
 ├── data/
-│   ├── raw/                  # Datos crudos extraídos de la API en formato JSON (excluidos en Git)
-│   ├── processed/            # Tablas limpias y normalizadas en formato CSV (excluidas en Git)
-│   └── reports/              # Reporte ejecutivo en Excel multipestaña para consumo de BI
+│   ├── raw/                  # Datos crudos extraídos de la API (JSON)
+│   ├── processed/            # Datos limpios y estructurados (CSV)
+│   └── reports/              # Reporte ejecutivo final (Excel multipestaña)
 │
-├── .gitignore                # Excluye bases de datos locales, cachés y binarios
-├── ecommerce.db              # Base de datos relacional SQLite local (excluida en Git)
-├── extraer_api.py            # Módulo de extracción para productos
-├── extraer_carritos.py       # Módulo de extracción para carritos y transacciones
-├── extraer_datos_clientes.py # Módulo de extracción para usuarios y clientes
-├── transformar_productos.py  # Pipeline de limpieza y normalización de productos
-├── transformar_clientes.py   # Pipeline de limpieza y normalización geográfica de clientes
-├── transformar_carritos.py   # Procesamiento y aplanamiento de transacciones anidadas
-├── cargar_a_sqlite.py        # Script de carga que mapea CSVs a tablas SQL relacionales
-├── consultar_datos.py        # Motor de consultas SQL analíticas y exportación a Excel
-├── main.py                   # Script orquestador central que ejecuta todo el flujo ETL
-└── README.md                 # Documentación técnica del proyecto
-
+├── .gitignore                # Archivos excluidos del control de versiones
+├── cargar_a_sqlite.py        # Script de carga al Data Warehouse
+├── consultar_datos.py        # Motor de consultas SQL y exportación a Excel
+├── ecommerce.db              # Base de datos SQLite (generada por el pipeline)
+├── extraer_api.py            # Extracción de productos
+├── extraer_carritos.py       # Extracción de carritos y transacciones
+├── extraer_datos_clientes.py # Extracción de datos demográficos de usuarios
+├── main.py                   # Script orquestador principal del ETL
+├── transformar_carritos.py   # Limpieza y normalización de carritos
+├── transformar_clientes.py   # Limpieza y normalización de clientes
+└── transformar_productos.py  # Limpieza y normalización de productos
 
 📊 Insights Clave de Negocio y Consultas SQL
 
